@@ -1,5 +1,9 @@
 package com.umdasl.robot.robotcontroller;
 
+
+
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,9 +37,7 @@ public class MainActivity extends AppCompatActivity {
                     recordButton.setText("Stop Recording");
                     recordButton.setBackgroundColor(getResources().getColor(R.color.Red));
                 }else{
-                    recording = false;
-                    recordButton.setText("Start Recording");
-                    recordButton.setBackgroundColor(getResources().getColor(R.color.Green));
+                    stopRecording();
                 }
             }
         });
@@ -59,5 +61,23 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+    void stopRecording(){
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Closing Activity")
+                .setMessage("Are you sure you want to stop taking a vedio?")
+                .setPositiveButton("Yes,stop it!", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        recording = false;
+                        recordButton.setText("Start Recording");
+                        recordButton.setBackgroundColor(getResources().getColor(R.color.Green));
+                    }
+
+                })
+                .setNegativeButton("No,keep taking it!", null)
+                .show();
     }
 }
