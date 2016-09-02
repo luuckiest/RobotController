@@ -16,18 +16,18 @@ public class MainActivity extends AppCompatActivity {
         //code goes
         recording = false;
         recordButton = (Button)findViewById(R.id.button);
-        recordButton.setText("start recording");
+        recordButton.setText("Start Recording");
         recordButton.setBackgroundColor(getResources().getColor(R.color.Green));
         recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!recording){
                     recording = true;
-                    recordButton.setText("stop recording");
+                    recordButton.setText("Stop Recording");
                     recordButton.setBackgroundColor(getResources().getColor(R.color.Red));
                 }else{
                     recording = false;
-                    recordButton.setText("start recording");
+                    recordButton.setText("Start Recording");
                     recordButton.setBackgroundColor(getResources().getColor(R.color.Green));
                 }
             }
