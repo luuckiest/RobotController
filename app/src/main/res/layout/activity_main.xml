@@ -17,20 +17,30 @@
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-
-    <ImageView
+    <RelativeLayout
         android:layout_width="50dp"
-        android:layout_height="100dp"
-        android:background="@color/Green"
-        android:id="@+id/leftMotor"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"/>
-
-    <ImageView
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/leftMotorContainer">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            android:background="@color/Green"
+            android:id="@+id/leftMotor"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"/>
+    </RelativeLayout>
+    <RelativeLayout
         android:layout_width="50dp"
-        android:layout_height="100dp"
-        android:background="@color/Green"
-        android:id="@+id/rightMotor"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:id="@+id/rightMotorContainer">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="100dp"
+            android:background="@color/Green"
+            android:id="@+id/rightMotor"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 </RelativeLayout>
