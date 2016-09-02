@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,14 @@ public class MainActivity extends AppCompatActivity {
     ImageView leftMotor;
     RelativeLayout rightMotorContainer;
     ImageView rightMotor;
+    float leftMotorHeight;
+    float leftContainerHeight;
+    float leftY;
+    float leftYValue;
+    float rightY;
+    float rightYValue;
+    float rightMotorHeight;
+    float rightContainerHeight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +55,21 @@ public class MainActivity extends AppCompatActivity {
         leftMotorContainer.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.d("robot",Float.toString(event.getY()));
-                leftMotor.setY(event.getY()-leftMotor.getHeight()/2);
-                return false;
+                leftY = event.getY();
+                leftMotorHeight = leftMotor.getHeight();
+                leftContainerHeight = leftMotorContainer.getHeight();
+                if(leftY -leftMotorHeight<=0)
+                    leftY = leftMotorHeight/2;
+                if(leftY + leftMotorHeight/2> leftContainerHeight)
+                    leftY = leftContainerHeight-leftMotorHeight/2;
+//                leftYValue=-2*(leftY-leftContainerHeight)/(leftContainerHeight-leftMotorHeight);
+                leftYValue=(-leftY+538)/363;
+                Log.d("robot",Float.toString(leftYValue));
+                if (event.getAction() == MotionEvent.ACTION_UP)
+                    leftMotor.setY(leftMotorContainer.getHeight() / 2 - leftMotor.getHeight() / 2);
+                else
+                    leftMotor.setY(leftY - leftMotor.getHeight() / 2);
+                return true;
             }
         });
         rightMotorContainer = (RelativeLayout)findViewById(R.id.rightMotorContainer);
@@ -56,9 +77,21 @@ public class MainActivity extends AppCompatActivity {
         rightMotorContainer.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Log.d("robot",Float.toString(event.getY()));
-                rightMotor.setY(event.getY()-rightMotor.getHeight()/2);
-                return false;
+                rightY = event.getY();
+                rightMotorHeight = rightMotor.getHeight();
+                rightContainerHeight = rightMotorContainer.getHeight();
+                if(rightY -rightMotorHeight<=0)
+                    rightY = rightMotorHeight/2;
+                if(rightY + rightMotorHeight/2> rightContainerHeight)
+                    rightY = rightContainerHeight-rightMotorHeight/2;
+//                rightYValue=-2*(rightY-rightContainerHeight)/(rightContainerHeight-rightMotorHeight);
+                rightYValue=(-rightY+538)/363;
+                Log.d("robot",Float.toString(rightYValue));
+                if (event.getAction() == MotionEvent.ACTION_UP)
+                    rightMotor.setY(rightMotorContainer.getHeight() / 2 - rightMotor.getHeight() / 2);
+                else
+                    rightMotor.setY(rightY - rightMotor.getHeight() / 2);
+                return true;
             }
         });
     }
@@ -80,4 +113,5 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("No,keep taking it!", null)
                 .show();
     }
+
 }
