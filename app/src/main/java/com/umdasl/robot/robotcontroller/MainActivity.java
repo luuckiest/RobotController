@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -17,6 +19,7 @@ import android.widget.RelativeLayout;
 public class MainActivity extends AppCompatActivity {
     Button recordButton;
     boolean recording;
+    WebView webView;
     RelativeLayout leftMotorContainer;
     ImageView leftMotor;
     RelativeLayout rightMotorContainer;
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //code goes
+        webView = (WebView)findViewById(R.id.webView);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("http://www.google.com/");
         recording = false;
         recordButton = (Button)findViewById(R.id.button);
         recordButton.setText("Start Recording");
@@ -58,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 leftY = event.getY();
                 leftMotorHeight = leftMotor.getHeight();
                 leftContainerHeight = leftMotorContainer.getHeight();
-                if(leftY -leftMotorHeight<=0)
+                if(leftY -leftMotorHeight<=-leftMotorHeight/2)
                     leftY = leftMotorHeight/2;
                 if(leftY + leftMotorHeight/2> leftContainerHeight)
                     leftY = leftContainerHeight-leftMotorHeight/2;
@@ -80,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 rightY = event.getY();
                 rightMotorHeight = rightMotor.getHeight();
                 rightContainerHeight = rightMotorContainer.getHeight();
-                if(rightY -rightMotorHeight<=0)
+                if(rightY -rightMotorHeight<=-rightMotorHeight/2)
                     rightY = rightMotorHeight/2;
                 if(rightY + rightMotorHeight/2> rightContainerHeight)
                     rightY = rightContainerHeight-rightMotorHeight/2;
@@ -99,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Closing Activity")
-                .setMessage("Are you sure you want to stop taking a vedio?")
+                .setMessage("Are you sure you want to stop learning?")
                 .setPositiveButton("Yes,stop it!", new DialogInterface.OnClickListener()
                 {
                     @Override
@@ -113,5 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("No,keep taking it!", null)
                 .show();
     }
+
 
 }
